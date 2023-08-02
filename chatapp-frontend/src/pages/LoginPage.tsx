@@ -4,7 +4,7 @@ import LoginForm from '../components/forms/LoginForm'
 
 const LoginPage = () => {
   return (
-    <Page>
+    <Page display='flex' justifyContent='center' alignItems='center'>
         <LoginForm/>
     </Page>
   )

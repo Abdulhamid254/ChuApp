@@ -12,9 +12,9 @@ const LoginForm = () => {
         formState: { errors}
     } = useForm()
 
-    console.log(errors);
+    // console.log(errors);
     const onSubmit =(data: any) =>{
-        console.log(data);
+        // console.log(data);
         
     }
 
