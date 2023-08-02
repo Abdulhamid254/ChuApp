@@ -1,6 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, MaxLength } from 'class-validator';
 
-/* eslint-disable prettier/prettier */
 export class CreateUserDto {
   @IsEmail()
   @IsNotEmpty()
