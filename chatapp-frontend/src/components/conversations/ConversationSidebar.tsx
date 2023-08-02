@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import { ConversationSidebarContainer, ConversationSidebarHeader, ConversationSidebarItemStyle, ConversationsSidebarStyle } from '../../utils/styles';
+import { ConversationSidebarContainer, ConversationSidebarHeader, ConversationSidebarItem, ConversationsSidebarStyle } from '../../utils/styles';
 import { TbEdit } from 'react-icons/tb';
 import { ConverastionType } from '../../utils/types';
 import styles from './index.module.scss'
+import { useNavigate } from 'react-router-dom';
 
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
 }
 
 const ConversationSidebar: FC<Props>= ({conversations}) => {
+
+  const navigate = useNavigate()
   return (
     <ConversationsSidebarStyle>
       <ConversationSidebarHeader>
@@ -18,13 +21,13 @@ const ConversationSidebar: FC<Props>= ({conversations}) => {
       </ConversationSidebarHeader>
       <ConversationSidebarContainer>
         {conversations.map((conversation) => (
-          <ConversationSidebarItemStyle>
+          <ConversationSidebarItem onClick={() =>navigate(`/conversations/${conversation.id}`)}>
             <div className={styles.conversationAvatar}></div>
             <div>
               <span className={styles.conversationName}>{conversation.name}</span>
               <span className={styles.conversationLastMessage}>{conversation.lastMessage}</span>
             </div>
-          </ConversationSidebarItemStyle>
+          </ConversationSidebarItem>
         ))}
       </ConversationSidebarContainer>
     </ConversationsSidebarStyle>
