@@ -1,8 +1,7 @@
+/* eslint-disable prettier/prettier */
+import { Session } from './entities/Session';
 import { User } from './entities/user';
 
-/* eslint-disable prettier/prettier */
-const entities = [User];
+export { User, Session };
 
-export { User };
-
-export default entities;
+export const entities = [User, Session];

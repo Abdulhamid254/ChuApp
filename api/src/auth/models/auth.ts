@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import { ValidateUserDetails } from 'src/utils/types';
+
 export interface IAuthService {
-  validateuser();
+  validateUser(userCredentials: ValidateUserDetails);
 }
