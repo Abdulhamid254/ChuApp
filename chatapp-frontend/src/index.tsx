@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
 
 
 
@@ -18,6 +19,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <App />
+    {/* THE DEV TOOLS SHOULD ONLY BE USED FOR PRODUCTION */}
+    {/* devtools helps us to see what request are going and what we get from our server is it in process or is it stale etc */}
+    <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>
   </React.StrictMode>
 );
