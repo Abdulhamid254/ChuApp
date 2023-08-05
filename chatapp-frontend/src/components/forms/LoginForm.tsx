@@ -1,20 +1,38 @@
 import React from 'react';
 import { InputField,InputContainer, InputLabel, Button} from '../../utils/styles';
 import styles from './index.module.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { UserCredentialsParams } from '../../utils/types';
+import { useLoginMutation } from '../../hooks/apis/auth/auth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const LoginForm = () => {
+
+    const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit,
         formState: { errors}
-    } = useForm()
+    } = useForm<UserCredentialsParams>()
 
-    // console.log(errors);
-    const onSubmit =(data: any) =>{
-        // console.log(data);
+   const { mutate } = useLoginMutation()
+
+    const onSubmit = async (data: UserCredentialsParams) =>{
+       await mutate(data, {
+        onSuccess: () => {
+             toast.success("Login Successful!");
+             navigate('/conversations');
+        },
+        onError: (response) => {
+            toast.error("Error occurred while login");
+            console.log(response);
+            
+        }
+       })
         
     }
 

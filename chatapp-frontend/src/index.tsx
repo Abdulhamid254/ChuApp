@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -19,9 +20,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <App />
-    {/* THE DEV TOOLS SHOULD ONLY BE USED FOR PRODUCTION */}
-    {/* devtools helps us to see what request are going and what we get from our server is it in process or is it stale etc */}
-    <ReactQueryDevtools initialIsOpen={false}/>
+    <ToastContainer /> 
     </QueryClientProvider>
   </React.StrictMode>
 );

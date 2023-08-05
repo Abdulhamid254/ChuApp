@@ -1,10 +1,12 @@
 import React from 'react'
 import { InputField,InputContainer, InputLabel, Button} from '../../utils/styles';
 import styles from './index.module.scss'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { CreateUserParams } from '../../utils/types';
-import { postRegisterUser } from '../../hooks/apis/auth/auth';
+import { useSignUpMutation } from '../../hooks/apis/auth/auth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -13,20 +15,32 @@ const RegisterForm = () => {
     // const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>{
     //     event.preventDefault()
     // }
+
+    const navigate = useNavigate();
     const {
         register,   
         handleSubmit,
         formState: {errors},
-    } = useForm<CreateUserParams>()
+    } = useForm<CreateUserParams>();
 
-    console.log(errors);
+    // console.log(errors);
+
     
    
-//  const signUpMutation = useSignUp(); // Use the custom hook here
+const { mutate } = useSignUpMutation()
 
-  const onSubmit = async (data: CreateUserParams) => {
-    console.log(data);
-    await postRegisterUser(data)
+  const onSubmit = async (data:CreateUserParams) => {
+      await mutate(data, {
+        onSuccess: () => {
+             toast.success("User Registered Successfully!");
+             navigate('/login');
+        },
+        onError: (response) => {
+            toast.error("Error occurred while registering");
+            console.log(response);
+            
+        }
+      })
   };
     
   return (
