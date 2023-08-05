@@ -32,6 +32,7 @@ const { mutate } = useSignUpMutation()
   const onSubmit = async (data:CreateUserParams) => {
       await mutate(data, {
         onSuccess: () => {
+            console.log("User",data);
              toast.success("User Registered Successfully!");
              navigate('/login');
         },

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosRequestConfig, } from "axios";
-import { CreateUserParams, UserCredentialsParams } from "../../../utils/types";
+import { CreateUserParams, User, UserCredentialsParams } from "../../../utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 
@@ -32,6 +32,11 @@ export const useLoginMutation = () => {
 }
 
 
+// getting user status
 
-
+export const useAuthUser = () => {
+    return useQuery(['User'], () => {
+        return axios.get<User>(`${API_URL}/auth/status`, config);
+    });
+}
 

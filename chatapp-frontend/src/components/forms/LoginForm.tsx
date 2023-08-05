@@ -24,8 +24,11 @@ const LoginForm = () => {
     const onSubmit = async (data: UserCredentialsParams) =>{
        await mutate(data, {
         onSuccess: () => {
+            console.log("User",data);
              toast.success("Login Successful!");
              navigate('/conversations');
+             
+             
         },
         onError: (response) => {
             toast.error("Error occurred while login");
