@@ -13,6 +13,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
   }
 }
 
+// protects the get status routes
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<any> {
