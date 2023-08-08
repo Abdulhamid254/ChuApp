@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ConversationChannelPageStyle } from '../utils/styles'
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+;
+import { AuthContext } from '../utils/context/AuthContext';
 
 const ConversationChannelPage = () => {
-    console.log(useParams());
+
+  const {user}= useContext(AuthContext)
     
   return (
     <ConversationChannelPageStyle>
-        convesation channnel channel channel channel page
+      {user && user.email}
     </ConversationChannelPageStyle>
   )
 }

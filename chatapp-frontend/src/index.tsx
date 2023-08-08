@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 
 
@@ -20,6 +21,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <App />
+    <ReactQueryDevtools/>
     <ToastContainer /> 
     </QueryClientProvider>
   </React.StrictMode>

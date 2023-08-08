@@ -1,9 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosRequestConfig, } from "axios";
+import { useContext } from 'react'
 import { CreateUserParams, User, UserCredentialsParams } from "../../../utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+
+
+
+// context coming into play
 
 
 
@@ -23,6 +31,8 @@ export const useSignUpMutation = () => {
 }
 
 
+
+
 // loggin the user
 
 export const useLoginMutation = () => {
@@ -34,9 +44,25 @@ export const useLoginMutation = () => {
 
 // getting user status
 
-export const useAuthUser = () => {
-    return useQuery(['User'], () => {
-        return axios.get<User>(`${API_URL}/auth/status`, config);
-    });
-}
+// export const useAuthUser = () => {
+//     return useQuery(['User'], () => {
+//         return axios.get<User>(`${API_URL}/auth/status`, config);
+//     });
+// }
 
+// getting user status
+export const useAuthUser = () => {
+    return useQuery({
+        queryKey: ["User"],
+        queryFn: async () => {
+            const  data  = await  axios.get<User>(`${API_URL}/auth/status`, config);
+            return data 
+        },
+        onSuccess(data) {
+           toast.success("Authentication Success!");
+        },
+        onError(err) {
+           toast.error("Authentication error ocurred!!"); 
+        }
+    })
+}
