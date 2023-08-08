@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { ConversationSidebarContainer, ConversationSidebarHeader, ConversationSidebarItem, ConversationsSidebarStyle } from '../../utils/styles';
 import { TbEdit } from 'react-icons/tb';
 import { ConverastionType } from '../../utils/types';
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom';
+import { CreateConversationModal } from '../modals/CreateConversationModal';
 
 
 type Props = {
@@ -12,12 +13,18 @@ type Props = {
 
 const ConversationSidebar: FC<Props>= ({conversations}) => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  
   return (
+    <>
+    {showModal && <CreateConversationModal></CreateConversationModal>}
     <ConversationsSidebarStyle>
       <ConversationSidebarHeader>
         <h1>Conversations</h1>
-        <TbEdit size={40}/>
+        <div onClick={() => setShowModal(!showModal)}>
+            <TbEdit size={40}/>
+        </div>
       </ConversationSidebarHeader>
       <ConversationSidebarContainer>
         {conversations.map((conversation) => (
@@ -30,7 +37,7 @@ const ConversationSidebar: FC<Props>= ({conversations}) => {
           </ConversationSidebarItem>
         ))}
       </ConversationSidebarContainer>
-    </ConversationsSidebarStyle>
+    </ConversationsSidebarStyle></>
   )
 }
 

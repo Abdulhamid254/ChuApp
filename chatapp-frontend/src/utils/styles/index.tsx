@@ -125,3 +125,13 @@ export const ConversationSidebarItem = styled.div`
   
 `;
 
+export const OverlayStyle = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: #000000c4;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+`
