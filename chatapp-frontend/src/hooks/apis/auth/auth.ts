@@ -58,6 +58,7 @@ export const useAuthUser = () => {
             const  data  = await  axios.get<User>(`${API_URL}/auth/status`, config);
             return data 
         },
+        staleTime: Infinity, // Prevent automatic refetching
         onSuccess(data) {
            toast.success("Authentication Success!");
         },

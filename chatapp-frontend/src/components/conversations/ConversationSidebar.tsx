@@ -18,7 +18,7 @@ const ConversationSidebar: FC<Props>= ({conversations}) => {
   
   return (
     <>
-    {showModal && <CreateConversationModal></CreateConversationModal>}
+    {showModal && <CreateConversationModal setShowModal={setShowModal}/>}
     <ConversationsSidebarStyle>
       <ConversationSidebarHeader>
         <h1>Conversations</h1>

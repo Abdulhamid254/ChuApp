@@ -2,15 +2,24 @@ import React, { useContext } from 'react'
 import { ConversationChannelPageStyle } from '../utils/styles'
 // import { useParams } from 'react-router-dom';
 ;
-import { AuthContext } from '../utils/context/AuthContext';
+import { useAuthUser } from '../hooks/apis/auth/auth';
+
 
 const ConversationChannelPage = () => {
 
-  const {user}= useContext(AuthContext)
+  // getting the user data
+  const {data} = useAuthUser();
+
+   if (!data) {
+    return <div>No user data available.</div>;
+  }
+
+  const userData = data.data;
+ 
     
   return (
     <ConversationChannelPageStyle>
-      {user && user.email}
+      {userData && userData.email}
     </ConversationChannelPageStyle>
   )
 }
