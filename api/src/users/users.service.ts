@@ -16,10 +16,10 @@ export class UsersService implements IUserService {
   // creating the user function
 
   async createUser(userDetails: CreateUserDetails) {
-    const existinUser = await this.userRepository.findOneBy({
+    const existingUser = await this.userRepository.findOneBy({
       email: userDetails.email,
     });
-    if (existinUser)
+    if (existingUser)
       throw new HttpException('User already Exist', HttpStatus.CONFLICT);
     const password = await hashPassword(userDetails.password);
     const newUser = this.userRepository.create({ ...userDetails, password });
@@ -28,6 +28,14 @@ export class UsersService implements IUserService {
 
   // retrieving the user function based on the email
   async findUser(findUserParams: FindUserParams): Promise<User> {
-    return this.userRepository.findOneBy(findUserParams);
+    return this.userRepository.findOne({
+      where: findUserParams,
+      relations: ['participant'],
+    });
+  }
+  // saving the user
+
+  async saveUser(user: User) {
+    return this.userRepository.save(user);
   }
 }

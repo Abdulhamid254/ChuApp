@@ -1,6 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Participant } from './Participants';
 
 @Entity({ name: 'users' })
 export class User {
@@ -19,4 +26,9 @@ export class User {
   @Column()
   @Exclude()
   password: string;
+
+  @OneToOne(() => Participant)
+  @JoinColumn()
+  participant: Participant;
+  userDB: Promise<Participant>;
 }
